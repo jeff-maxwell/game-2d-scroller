@@ -2,5 +2,3 @@
 
 This is the Unity game project for team asteroids.
 
-
-Go Asteroids team!!!
