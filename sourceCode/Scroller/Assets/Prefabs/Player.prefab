@@ -148,7 +148,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_GroundCheck: {fileID: 3423346358354587864}
   m_CeilingCheck: {fileID: 7925035657443796772}
-  m_CrouchDisableCollider: {fileID: 0}
+  m_CrouchDisableCollider: {fileID: 394046814580678086}
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 2811621546062480004}
-  animator: {fileID: 0}
+  animator: {fileID: 1489618665108214587}
   runSpeed: 40
 --- !u!1 &3467158565550677098
 GameObject:
