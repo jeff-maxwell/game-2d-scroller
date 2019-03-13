@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 22061972}
   - component: {fileID: 22061974}
   - component: {fileID: 22061973}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: PlayAgainText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3256,7 +3256,7 @@ GameObject:
   - component: {fileID: 311320550}
   - component: {fileID: 311320552}
   - component: {fileID: 311320551}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4358,7 +4358,7 @@ GameObject:
   - component: {fileID: 404457397}
   - component: {fileID: 404457396}
   - component: {fileID: 404457395}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: PlayAgainButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4424,7 +4424,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 404457396}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 287464230}
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &404457396
@@ -6812,7 +6823,7 @@ GameObject:
   - component: {fileID: 624455213}
   - component: {fileID: 624455212}
   - component: {fileID: 624455211}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: GameOverCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14434,6 +14445,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1216372211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 137358362272303381, guid: d6fe1e6eb923d461286851632be5c8b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1196385159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1216372212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216372211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb658d43f9f252438fc88e902440ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1222653937
 GameObject:
   m_ObjectHideFlags: 0
@@ -15951,7 +15980,7 @@ GameObject:
   - component: {fileID: 1365775573}
   - component: {fileID: 1365775575}
   - component: {fileID: 1365775574}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: GameOverText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17250,7 +17279,7 @@ GameObject:
   - component: {fileID: 1467281174}
   - component: {fileID: 1467281176}
   - component: {fileID: 1467281175}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: QuitText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17488,7 +17517,7 @@ GameObject:
   - component: {fileID: 1483381630}
   - component: {fileID: 1483381629}
   - component: {fileID: 1483381628}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17554,7 +17583,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1483381629}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 287464230}
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1483381629
