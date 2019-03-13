@@ -58,6 +58,7 @@ public class Jump : MonoBehaviour
 
             }
 
+            
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX = true;
@@ -66,6 +67,7 @@ public class Jump : MonoBehaviour
             {
                 GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX = false;
             }
+            
         }
     }
 
