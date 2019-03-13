@@ -4795,6 +4795,11 @@ PrefabInstance:
       propertyPath: m_CrouchDisableCollider
       value: 
       objectReference: {fileID: 1520070628}
+    - target: {fileID: 2811621546062480004, guid: fc339c4e1b2c7c642927e3d633c78d71,
+        type: 3}
+      propertyPath: m_JumpForce
+      value: 1600
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc339c4e1b2c7c642927e3d633c78d71, type: 3}
 --- !u!1 &414843237
