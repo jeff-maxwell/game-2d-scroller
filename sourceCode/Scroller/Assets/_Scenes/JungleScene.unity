@@ -3152,6 +3152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bb4a4a2a4b110429a7170d956ec0f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverCanvas: {fileID: 624455210}
 --- !u!4 &287464231
 Transform:
   m_ObjectHideFlags: 0
@@ -14463,6 +14464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb658d43f9f252438fc88e902440ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverCanvas: {fileID: 624455210}
 --- !u!1 &1222653937
 GameObject:
   m_ObjectHideFlags: 0

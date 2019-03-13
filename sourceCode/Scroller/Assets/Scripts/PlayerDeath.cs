@@ -5,12 +5,11 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour
 {
     private bool isAlive = true;
-    private GameObject gameOverCanvas;
+    public GameObject gameOverCanvas;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameOverCanvas = GameObject.Find("GameOverCanvas");
     }
 
     // Update is called once per frame
@@ -26,5 +25,6 @@ public class PlayerDeath : MonoBehaviour
     {
         isAlive = false;
         gameOverCanvas.SetActive(true);
+        Time.timeScale = 0;
     }
 }
