@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
     IEnumerator FlashHurt()
     {
         hurtPanel.gameObject.SetActive(true);
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.3f);
         hurtPanel.gameObject.SetActive(false);
     }
 
