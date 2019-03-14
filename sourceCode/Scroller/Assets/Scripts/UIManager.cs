@@ -30,7 +30,10 @@ public class UIManager : MonoBehaviour
 
     public void hit()
     {
-        lives--;
+        if (lives > 0)
+        {
+            lives--;
+        }
         hearts[lives].color = new Color(0, 0, 0, .75f);
         StartCoroutine("FlashHurt");
         if (lives == 0)
