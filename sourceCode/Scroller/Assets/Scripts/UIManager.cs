@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public Canvas gameOverCanvas;
     public Canvas playerHud;
     public Canvas levelCompleteCanvas;
+    public GameObject hurtPanel; 
 
     private RawImage[] hearts;
 
@@ -22,6 +23,8 @@ public class UIManager : MonoBehaviour
     {
         gameOverCanvas.enabled = false;
         levelCompleteCanvas.enabled = false;
+        hurtPanel.gameObject.SetActive(false);
+
         hearts = playerHud.transform.GetComponentsInChildren<RawImage>();
     }
 
@@ -29,10 +32,18 @@ public class UIManager : MonoBehaviour
     {
         lives--;
         hearts[lives].color = new Color(0, 0, 0, .75f);
+        StartCoroutine("FlashHurt");
         if (lives == 0)
         {
             setGameOver();
         }
+    }
+
+    IEnumerator FlashHurt()
+    {
+        hurtPanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        hurtPanel.gameObject.SetActive(false);
     }
 
     public int getLives()
