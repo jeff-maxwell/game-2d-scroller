@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/JungleJM.unity
     guid: e00258321ab2d4082a5c97c3b9cbe2f5
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/DesertJM.unity
     guid: b648f082cf6404fe49edbf36e530abf0
+  - enabled: 1
+    path: Assets/_Scenes/JungleNZ.unity
+    guid: af8065292c9866b41ba8d569f92d112a
+  - enabled: 1
+    path: Assets/_Scenes/DesertNZ.unity
+    guid: 1b664e6d783838f46b5be09e4ae95011
   m_configObjects: {}

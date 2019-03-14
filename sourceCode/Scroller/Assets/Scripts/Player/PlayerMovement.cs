@@ -54,6 +54,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        //make enemy run at you
+        if (col.gameObject.CompareTag("AttackTrigger"))
+        {
+            col.gameObject.transform.parent.gameObject.GetComponent<ZombieMovement>().IsAttack = true;
+        }
+
+
+
         Debug.Log(hit);
         if(!hit)
         {
@@ -81,14 +89,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsJumping", false);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("AttackTrigger"))
-        {
-            collision.gameObject.transform.parent.gameObject.GetComponent<ZombieMovement>().IsAttack = true;
-        }
-
-    }
+ 
 
 
 

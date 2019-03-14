@@ -3906,7 +3906,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb55102a67cd46c4bbf751fba4cb244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1677928968}
   smoothing: 5
 --- !u!20 &1101356100
 Camera:
@@ -4669,7 +4668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1252067833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5197,12 +5196,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &1677928968 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1552280364340656888, guid: fc339c4e1b2c7c642927e3d633c78d71,
-    type: 3}
-  m_PrefabInstance: {fileID: 692619656}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1698714810
 PrefabInstance:
   m_ObjectHideFlags: 0
