@@ -10,7 +10,10 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameOverCanvas.SetActive(false);
+        Canvas gameOverCanvas = GameObject.FindGameObjectWithTag("GameOverCanvas")
+                                              .GetComponent<Canvas>();
+
+        gameOverCanvas.enabled = false;
     }
 
     // Update is called once per frame
