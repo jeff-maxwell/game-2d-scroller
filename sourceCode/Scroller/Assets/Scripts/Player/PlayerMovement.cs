@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public UIManager uiManager;
 
+
     public Vector2 winPosition;
 
     public float runSpeed = 40f;
@@ -18,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private bool levelComplete = false;
     private bool jump = false;
     private bool crouch = false;
+
+    private Collider2D hitCollider; //Collider that player ran into. Need this to disable collision between player and collider after impact
+                                  //Then Re-enable for collision in the update() function.
 
     // Update is called once per frame
     void Update()
@@ -49,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     hit = false;
                     hitTime = 0;
+                    Physics2D.IgnoreCollision(GetComponent<PolygonCollider2D>(), hitCollider, false);
                 }
             }
 
@@ -57,6 +62,14 @@ public class PlayerMovement : MonoBehaviour
                 uiManager.setLevelCompleteHud();
                 animator.speed = 0;
                 levelComplete = true;
+            }
+
+            if(transform.position.y < -15)
+            {
+                animator.Play("Dying", 0);
+                gameOver = true;
+                uiManager.setGameOver();
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             }
         }
     }
@@ -78,17 +91,24 @@ public class PlayerMovement : MonoBehaviour
         {
             col.gameObject.transform.parent.gameObject.GetComponent<ZombieMovement>().IsAttack = true;
         }
+    }
 
+    public void OnLanding()
+    {
+        animator.SetBool("IsJumping", false);
+    }
 
-
-        Debug.Log(hit);
-        if(!hit)
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (!hit)
         {
-            if (col.gameObject.CompareTag("obstical"))
+            if (col.gameObject.CompareTag("Enemy"))
             {
                 hit = true;
                 uiManager.hit();
-                if(uiManager.getLives() == 0)
+                hitCollider = (Collider2D) col.gameObject.GetComponent<PolygonCollider2D>();
+                Physics2D.IgnoreCollision(GetComponent<PolygonCollider2D>(), hitCollider, true);
+                if (uiManager.getLives() == 0)
                 {
                     animator.Play("Dying", 0);
                     gameOver = true;
@@ -98,25 +118,6 @@ public class PlayerMovement : MonoBehaviour
                     animator.Play("Hurt", 0);
                 }
             }
-        }
-
-    }
-
-    public void OnLanding()
-    {
-        animator.SetBool("IsJumping", false);
-    }
-
- 
-
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            //Take damage this is handled to kill the player through the KillPlayer script
-
         }
     }
 

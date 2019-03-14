@@ -29,10 +29,9 @@ public class UIManager : MonoBehaviour
     {
         lives--;
         hearts[lives].color = new Color(0, 0, 0, .75f);
-        Debug.Log("Hit");
         if (lives == 0)
         {
-            gameOverCanvas.enabled = true;
+            setGameOver();
         }
     }
 
@@ -43,8 +42,20 @@ public class UIManager : MonoBehaviour
 
     public void setLevelCompleteHud()
     {
-        levelCompleteCanvas.enabled = true;
         playerHud.enabled = false;
+        playerHud.gameObject.SetActive(false);
+        levelCompleteCanvas.enabled = true;
+        levelCompleteCanvas.gameObject.SetActive(true);
+    }
+
+    public void setGameOver()
+    {
+        playerHud.enabled = false;
+        playerHud.gameObject.SetActive(false);
+        levelCompleteCanvas.enabled = false;
+        levelCompleteCanvas.gameObject.SetActive(false);
+        gameOverCanvas.enabled = true;
+        gameOverCanvas.gameObject.SetActive(true);
     }
 
     public void RestartLevel()
