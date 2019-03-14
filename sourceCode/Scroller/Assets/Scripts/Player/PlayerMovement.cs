@@ -45,6 +45,26 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsJumping", false);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("AttackTrigger"))
+        {
+            collision.gameObject.transform.parent.gameObject.GetComponent<ZombieMovement>().IsAttack = true;
+        }
+
+    }
+
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //Take damage this is handled to kill the player through the KillPlayer script
+
+        }
+    }
+
 
 
 }

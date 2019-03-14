@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public GameObject gameOverCanvas;
+    public string restartGameSceneName;
+    public bool isRestartGame = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,17 +21,27 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         
     }
 
     public void GameOver()
     {
+
     }
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1;
+        if (isRestartGame)
+        {
+            SceneManager.LoadScene(restartGameSceneName);
+            Time.timeScale = 1;
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Time.timeScale = 1;
+        }
     }
 
     public void Quit()

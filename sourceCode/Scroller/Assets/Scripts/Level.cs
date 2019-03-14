@@ -5,8 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class Level : MonoBehaviour
 {
+    public string sceneName;
+    public bool showMenu = false;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SceneManager.LoadScene(1);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (showMenu)
+            {
+                Canvas gameOverCanvas = GameObject.FindGameObjectWithTag("GameOverCanvas")
+                                  .GetComponent<Canvas>();
+
+                UIManager ui = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+                ui.isRestartGame = true;
+                ui.restartGameSceneName = sceneName;
+
+                gameOverCanvas.enabled = true;
+
+                Destroy(collision.gameObject);
+            }
+            else {
+                SceneManager.LoadScene(sceneName);
+            }
+        }
+            
     }
 }
