@@ -4,52 +4,71 @@ public class PlayerMovement : MonoBehaviour
 {
     public PlayerController controller;
     public Animator animator;
+    public UIManager uiManager;
+
+    public Vector2 winPosition;
+
     public float runSpeed = 40f;
 
     private float horizontalMove = 0f;
     private float hitTime; //This is the time between being hit so hit() isnt called 21 times a millisecond
+
     private bool hit = false;
+    private bool gameOver = false;
+    private bool levelComplete = false;
     private bool jump = false;
     private bool crouch = false;
 
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        if (!gameOver && !levelComplete)
+        {
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        if (Input.GetKeyDown(KeyCode.Space)) //maybe add key for controller.
-        {
-            jump = true;
-            animator.SetBool("IsJumping", true);
-        }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow)) //maybe add key for controller.
-        {
-            crouch = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            crouch = false;
-        }
-
-        if (hit)
-        {
-            hitTime += Time.deltaTime;
-            if (hitTime > 1.2)
+            if (Input.GetKeyDown(KeyCode.Space)) //maybe add key for controller.
             {
-                hit = false;
-                hitTime = 0;
+                jump = true;
+                animator.SetBool("IsJumping", true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow)) //maybe add key for controller.
+            {
+                crouch = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                crouch = false;
+            }
+
+            if (hit) //Used to pause the collide with the character and an item/enemy
+            {
+                hitTime += Time.deltaTime;
+                if (hitTime > 1.2)
+                {
+                    hit = false;
+                    hitTime = 0;
+                }
+            }
+
+            if(transform.position.x > winPosition.x && transform.position.y < winPosition.y)
+            {
+                uiManager.setLevelCompleteHud();
+                animator.speed = 0;
+                levelComplete = true;
             }
         }
-
     }
 
     private void FixedUpdate()
     {
         //for physics
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
-        jump = false;
+        if (!gameOver && !levelComplete)
+        {
+            controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+            jump = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -57,15 +76,14 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(hit);
         if(!hit)
         {
-            Debug.Log("Fired");
             if (col.gameObject.CompareTag("obstical"))
             {
                 hit = true;
-                GetComponent<GameInfo>().hit();
-                if(GetComponent<GameInfo>().getLives() == 0)
+                uiManager.hit();
+                if(uiManager.getLives() == 0)
                 {
                     animator.Play("Dying", 0);
-                    //Need to add script that turns off all controlls
+                    gameOver = true;
                 }
                 else
                 {
