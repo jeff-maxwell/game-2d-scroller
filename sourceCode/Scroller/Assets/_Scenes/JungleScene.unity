@@ -6735,11 +6735,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 287464230}
         m_MethodName: NextLevel
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -17252,7 +17252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334122428}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.7, y: 9.4, z: -150}
+  m_LocalPosition: {x: 23.4, y: 5.3, z: -150}
   m_LocalScale: {x: 55.625, y: 43.134377, z: 0.42867318}
   m_Children: []
   m_Father: {fileID: 0}

@@ -72,9 +72,9 @@ public class UIManager : MonoBehaviour
         //}
     }
 
-    public void NextLevel()
+    public void NextLevel(int level)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(level);
     }
 
     public void Quit()

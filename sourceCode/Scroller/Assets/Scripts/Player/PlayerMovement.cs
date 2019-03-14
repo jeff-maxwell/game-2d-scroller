@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,14 +15,14 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMove = 0f;
     private float hitTime; //This is the time between being hit so hit() isnt called 21 times a millisecond
 
-    private bool hit = false;
+    //private bool hit = false;
     private bool gameOver = false;
     private bool levelComplete = false;
     private bool jump = false;
     private bool crouch = false;
 
-    private Collider2D hitCollider; //Collider that player ran into. Need this to disable collision between player and collider after impact
-                                  //Then Re-enable for collision in the update() function.
+    private List<float> hitCoolDowns = new List<float>();      //If we get hit mutilple times by different enemies, each enemy will have his own cooldown time before he can be hit agian
+    private List<Collider2D> hitColliders = new List<Collider2D>(); //This is the list of corresonding enemies that will be toggled off after cool down = 0;
 
     // Update is called once per frame
     void Update()
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
             animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+            hitDetector(); //Detector for current hits on the players.
 
             if (Input.GetKeyDown(KeyCode.Space)) //maybe add key for controller.
             {
@@ -44,17 +46,6 @@ public class PlayerMovement : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.DownArrow))
             {
                 crouch = false;
-            }
-
-            if (hit) //Used to pause the collide with the character and an item/enemy
-            {
-                hitTime += Time.deltaTime;
-                if (hitTime > 1.2)
-                {
-                    hit = false;
-                    hitTime = 0;
-                    Physics2D.IgnoreCollision(GetComponent<PolygonCollider2D>(), hitCollider, false);
-                }
             }
 
             if(transform.position.x > winPosition.x && transform.position.y < winPosition.y)
@@ -100,27 +91,54 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (!hit)
+        if (col.gameObject.CompareTag("Enemy"))
         {
-            if (col.gameObject.CompareTag("Enemy"))
+            uiManager.hit();
+            hitCoolDowns.Add(1.2f);
+            hitColliders.Add(col.gameObject.GetComponent<PolygonCollider2D>());
+            Physics2D.IgnoreCollision(GetComponent<PolygonCollider2D>(), col.gameObject.GetComponent<PolygonCollider2D>(), true);
+            if (uiManager.getLives() == 0)
             {
-                hit = true;
-                uiManager.hit();
-                hitCollider = (Collider2D) col.gameObject.GetComponent<PolygonCollider2D>();
-                Physics2D.IgnoreCollision(GetComponent<PolygonCollider2D>(), hitCollider, true);
-                if (uiManager.getLives() == 0)
-                {
-                    animator.Play("Dying", 0);
-                    gameOver = true;
-                }
-                else
-                {
-                    animator.Play("Hurt", 0);
-                }
+                animator.Play("Dying", 0);
+                gameOver = true;
+            }
+            else
+            {
+                animator.Play("Hurt", 0);
+            }
+        }
+
+        if (col.gameObject.CompareTag("Big-Enemy"))
+        {
+            uiManager.hit();
+            uiManager.hit();
+            hitCoolDowns.Add(1.2f);
+            hitColliders.Add(col.gameObject.GetComponent<PolygonCollider2D>());
+            Physics2D.IgnoreCollision(GetComponent<PolygonCollider2D>(), col.gameObject.GetComponent<PolygonCollider2D>(), true);
+            if (uiManager.getLives() == 0)
+            {
+                animator.Play("Dying", 0);
+                gameOver = true;
+            }
+            else
+            {
+                animator.Play("Hurt", 0);
             }
         }
     }
 
-
+    private void hitDetector()
+    {
+        for(int i = 0; i < hitCoolDowns.Count; i++)
+        {
+            hitCoolDowns[i] -= Time.deltaTime;
+            if(hitCoolDowns[i] < 0)
+            {
+                Physics2D.IgnoreCollision(GetComponent<PolygonCollider2D>(), hitColliders[i], false);
+                hitCoolDowns.RemoveAt(0);
+                hitColliders.RemoveAt(0);
+            }
+        }
+    }
 
 }
