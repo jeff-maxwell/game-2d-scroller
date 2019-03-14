@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class CameraFollowing : MonoBehaviour
 {
-    private Transform target;  //what the camera is following
+    // Game Object the camera is following
+    private Transform target;
     public float smoothing = 5f;
 
     Vector3 offset;
 
-
-    // Use this for initialization
     void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
-        offset = transform.position - target.position;  //the difference between where the camera starts and where the player is
+        // The difference between where the camera starts and where the player
+        offset = transform.position - target.position;  
     }
 
     void FixedUpdate()
@@ -22,7 +22,8 @@ public class CameraFollowing : MonoBehaviour
         if (target != null)
         {
             Vector3 targetCamPos = target.position + offset;
-            transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);  //move the camera to a new position
+            // Move the camera to a new position
+            transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);  
         }
     }
 }

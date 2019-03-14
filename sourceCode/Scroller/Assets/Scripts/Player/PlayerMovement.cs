@@ -13,33 +13,38 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 40f;
 
     private float horizontalMove = 0f;
-    private float hitTime; //This is the time between being hit so hit() isnt called 21 times a millisecond
+    // This is the time between being hit so hit() isnt called 21 times a millisecond
+    private float hitTime; 
 
-    //private bool hit = false;
     private bool gameOver = false;
     private bool levelComplete = false;
     private bool jump = false;
     private bool crouch = false;
 
-    private List<float> hitCoolDowns = new List<float>();      //If we get hit mutilple times by different enemies, each enemy will have his own cooldown time before he can be hit agian
-    private List<Collider2D> hitColliders = new List<Collider2D>(); //This is the list of corresonding enemies that will be toggled off after cool down = 0;
+    // If we get hit mutilple times by different enemies, each enemy will have 
+    // his own cooldown time before he can be hit agian
+    private List<float> hitCoolDowns = new List<float>();
+    //This is the list of corresonding enemies that will be toggled off after cool down = 0;
+    private List<Collider2D> hitColliders = new List<Collider2D>(); 
 
-    // Update is called once per frame
     void Update()
     {
         if (!gameOver && !levelComplete)
         {
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
             animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-            hitDetector(); //Detector for current hits on the players.
+            // Detector for current hits on the players.
+            hitDetector(); 
 
-            if (Input.GetKeyDown(KeyCode.Space)) //maybe add key for controller.
+            // Space is the Jump key
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 jump = true;
                 animator.SetBool("IsJumping", true);
             }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow)) //maybe add key for controller.
+            // If the down arrow is pressed the crouch is true
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 crouch = true;
             }
@@ -48,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
                 crouch = false;
             }
 
+
             if(transform.position.x > winPosition.x && transform.position.y < winPosition.y)
             {
                 uiManager.setLevelCompleteHud();
@@ -55,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
                 levelComplete = true;
             }
 
+            // If the character goes below a certain position on the map kill the player
             if(transform.position.y < -15)
             {
                 animator.Play("Dying", 0);
@@ -67,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //for physics
+        // As long as the game and level are not over/complete allow the character to move
         if (!gameOver && !levelComplete)
         {
             controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
@@ -77,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        //make enemy run at you
+        // Make enemy run at you
         if (col.gameObject.CompareTag("AttackTrigger"))
         {
             col.gameObject.transform.parent.gameObject.GetComponent<ZombieMovement>().IsAttack = true;
@@ -86,17 +93,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnLanding()
     {
+        // Finish the jump animation
         animator.SetBool("IsJumping", false);
     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
+        // If the player impacts an Enemy take damage and update HUD
         if (col.gameObject.CompareTag("Enemy"))
         {
             uiManager.hit();
             hitCoolDowns.Add(1.2f);
             hitColliders.Add(col.gameObject.GetComponent<PolygonCollider2D>());
             Physics2D.IgnoreCollision(GetComponent<PolygonCollider2D>(), col.gameObject.GetComponent<PolygonCollider2D>(), true);
+            // If lives = 0 the player is dead
             if (uiManager.getLives() == 0)
             {
                 audioSource.Play();
@@ -110,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        // Big Enemy does twice as much damage
         if (col.gameObject.CompareTag("Big-Enemy"))
         {
             uiManager.hit();

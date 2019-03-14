@@ -12,8 +12,7 @@ public class AudioTracker : MonoBehaviour
     private float distance;
     private float distanceNorm;
 
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         audioSource = this.GetComponent<AudioSource>();
@@ -22,9 +21,10 @@ public class AudioTracker : MonoBehaviour
         audioSource.panStereo = -1;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Calculate the distance between the Game Object attached to script
+        // and the player
         distance = Mathf.Abs((gameObject.transform.position.x - player.transform.position.x));
     }
 
@@ -35,22 +35,14 @@ public class AudioTracker : MonoBehaviour
         {
             distanceNorm = (distance - player.transform.position.x) / (gameObject.transform.position.x - player.transform.position.x);
 
+            // As the player gets closer to the object associated to the script
+            // increase the volume of the audio
             if ((distanceNorm < 0) && (Mathf.Abs(distanceNorm) < MaxVolume))
             {
                 audioSource.volume = Mathf.Abs(distanceNorm);
             }else {
                 audioSource.volume = MaxVolume;
             }
-            /*
-            if (Mathf.Abs(1 - distanceNorm) > MaxVolume)
-            {
-                audioSource.volume = MaxVolume;
-            }
-            else
-            {
-                audioSource.volume = 1 - distanceNorm;
-            }
-             */
             
             audioSource.panStereo = 0;
         }

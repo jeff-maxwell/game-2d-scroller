@@ -17,21 +17,14 @@ public class ZombieMovement : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-
-    }
-
     private void FixedUpdate()
     {
+        // If the Zombie is attacking move them towards the Player
         if (IsAttack)
         {
             this.transform.Translate(horizontalMove * runSpeed * Time.fixedDeltaTime, 0, 0);
             animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         }
-
     }
 
 }
