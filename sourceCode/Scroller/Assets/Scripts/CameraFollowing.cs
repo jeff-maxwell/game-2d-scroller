@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollowing : MonoBehaviour
 {
-    public Transform target;  //what the camera is following
+    private Transform target;  //what the camera is following
     public float smoothing = 5f;
 
     Vector3 offset;
@@ -13,6 +13,7 @@ public class CameraFollowing : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        target = GameObject.FindWithTag("Player").transform;
         offset = transform.position - target.position;  //the difference between where the camera starts and where the player is
     }
 
