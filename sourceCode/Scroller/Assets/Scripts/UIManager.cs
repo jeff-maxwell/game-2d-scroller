@@ -13,20 +13,16 @@ public class UIManager : MonoBehaviour
     private RawImage[] hearts;
 
     private int lives = 3;
+    /* public GameObject gameOverCanvas;
+    public string restartGameSceneName;
+    public bool isRestartGame = false;*/
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(SceneManager.GetActiveScene().buildIndex);
         gameOverCanvas.enabled = false;
         levelCompleteCanvas.enabled = false;
         hearts = playerHud.transform.GetComponentsInChildren<RawImage>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void hit()
@@ -51,15 +47,18 @@ public class UIManager : MonoBehaviour
         playerHud.enabled = false;
     }
 
-    public void GameOver()
-    {
-
-    }
-
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1;
+        //if (isRestartGame)
+        //{
+            //SceneManager.LoadScene(restartGameSceneName);
+            //Time.timeScale = 1;
+        //}
+        //else
+        //{
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Time.timeScale = 1;
+        //}
     }
 
     public void NextLevel()

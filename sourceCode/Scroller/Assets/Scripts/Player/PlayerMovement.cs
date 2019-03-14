@@ -73,6 +73,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        //make enemy run at you
+        if (col.gameObject.CompareTag("AttackTrigger"))
+        {
+            col.gameObject.transform.parent.gameObject.GetComponent<ZombieMovement>().IsAttack = true;
+        }
+
+
+
         Debug.Log(hit);
         if(!hit)
         {
@@ -97,6 +105,19 @@ public class PlayerMovement : MonoBehaviour
     public void OnLanding()
     {
         animator.SetBool("IsJumping", false);
+    }
+
+ 
+
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //Take damage this is handled to kill the player through the KillPlayer script
+
+        }
     }
 
 

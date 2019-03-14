@@ -16,5 +16,7 @@ Background Forest: https://opengameart.org/content/living-tissue-background
 
 Jungle Music: https://www.youtube.com/watch?v=5lqkFY5wTgM
 Desert Music: https://www.youtube.com/watch?v=f4izWydINP8
+Tornado: https://www.youtube.com/watch?v=PIwNjscDIvg
+Evil Laugh: https://www.youtube.com/watch?v=1P526n6wfP4
 
 
