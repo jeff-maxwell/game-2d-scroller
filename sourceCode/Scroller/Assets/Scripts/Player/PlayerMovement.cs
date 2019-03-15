@@ -130,11 +130,13 @@ public class PlayerMovement : MonoBehaviour
             Physics2D.IgnoreCollision(GetComponent<PolygonCollider2D>(), col.gameObject.GetComponent<PolygonCollider2D>(), true);
             if (uiManager.getLives() == 0)
             {
+                audioSource.Play();
                 animator.Play("Dying", 0);
                 gameOver = true;
             }
             else
             {
+                audioSource.Play();
                 animator.Play("Hurt", 0);
             }
         }
