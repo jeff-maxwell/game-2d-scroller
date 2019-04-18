@@ -1,18 +1,18 @@
 # Team Asteroids Scroller Game
 
-This is the Unity game project for team asteroids.
+This is the Unity game project for my Masters class in Game Development at Oklahoma State University (OSU).  It was a group project (Team Asteroids) to build a 2D scroller game with 2 levels.  It was a fun project and I got to work with a great group of Devs.
 
 
-#Attributions
+## Attributions
 The following game would not be possible without the contributions of...
 
-##Images
+## Images
 
 - Player: https://craftpix.net/
 - Background Forest: https://opengameart.org/content/living-tissue-background
 
 
-##Audio
+## Audio
 
 - Jungle Music: https://www.youtube.com/watch?v=5lqkFY5wTgM
 - Desert Music: https://www.youtube.com/watch?v=f4izWydINP8
